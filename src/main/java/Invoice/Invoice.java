@@ -11,6 +11,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.List;
 import com.itextpdf.layout.element.Paragraph;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
@@ -21,36 +22,26 @@ import java.net.MalformedURLException;
  */
 public class Invoice {
 
-    public static void main(String[] args) throws FileNotFoundException, MalformedURLException {
+    public static void main(String[] args) throws FileNotFoundException {
         System.out.println("hhh");
 
-        String path = "invoice.pdf";
-        String para = "There are many variations of passages of Lorem "
-                + "Ipsum available, but the majority have suffered alteration "
-                + "in some form, by injected humour, or randomised words which "
-                + "don't look even slightly believable. If you are going to use "
-                + "a passage of Lorem Ipsum, you need to be sure there isn't "
-                + "anything embarrassing hidden in the middle of text. All the "
-                + "Lorem Ipsum generators on the Internet tend to repeat "
-                + "predefined chunks as necessary, making this the first true "
-                + "generator on the Internet. It uses a dictionary of over 200 "
-                + "Latin words, combined with a handful of model sentence "
-                + "structures, to generate Lorem Ipsum which looks reasonable. "
-                + "The generated Lorem Ipsum is therefore always free from "
-                + "repetition, injected humour, or non-characteristic words etc.";
+        List list = new List();
+        list.add("java");
+        list.add("kotlin");
+        list.add("c");
+        list.add("c++");
+        list.add("c#");
+        list.add("ruby");
+        list.add("python");
+        list.add("swift");
         
-        String imgsrc = "src\\main\\java\\img\\code.jpeg"; 
-        ImageData imgData = ImageDataFactory.create(imgsrc);
-        Image image = new Image(imgData);
-               
-        Paragraph paragraph = new Paragraph(para);
+        String path = "invoice.pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.addNewPage();
         Document document = new Document(pdfDocument);
-        document.add(paragraph);
-        document.add(image);
-
+        document.add(list);
+       
         document.close();
 
         System.out.println("helloo....");
