@@ -5,11 +5,15 @@
  */
 package Invoice;
 
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 
 /**
  *
@@ -17,7 +21,7 @@ import java.io.FileNotFoundException;
  */
 public class Invoice {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, MalformedURLException {
         System.out.println("hhh");
 
         String path = "invoice.pdf";
@@ -34,6 +38,10 @@ public class Invoice {
                 + "structures, to generate Lorem Ipsum which looks reasonable. "
                 + "The generated Lorem Ipsum is therefore always free from "
                 + "repetition, injected humour, or non-characteristic words etc.";
+        
+        String imgsrc = "src\\main\\java\\img\\code.jpeg"; 
+        ImageData imgData = ImageDataFactory.create(imgsrc);
+        Image image = new Image(imgData);
                
         Paragraph paragraph = new Paragraph(para);
         PdfWriter pdfWriter = new PdfWriter(path);
@@ -41,6 +49,7 @@ public class Invoice {
         pdfDocument.addNewPage();
         Document document = new Document(pdfDocument);
         document.add(paragraph);
+        document.add(image);
 
         document.close();
 
