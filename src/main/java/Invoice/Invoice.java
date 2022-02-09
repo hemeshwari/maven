@@ -4,17 +4,16 @@
  * and open the template in the editor.
  */
 package Invoice;
-
-import com.itextpdf.io.image.ImageData;
-import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.element.List;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Text;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
+import java.io.IOException;
 
 /**
  *
@@ -22,26 +21,25 @@ import java.net.MalformedURLException;
  */
 public class Invoice {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         System.out.println("hhh");
-
-        List list = new List();
-        list.add("java");
-        list.add("kotlin");
-        list.add("c");
-        list.add("c++");
-        list.add("c#");
-        list.add("ruby");
-        list.add("python");
-        list.add("swift");
         
         String path = "invoice.pdf";
         PdfWriter pdfWriter = new PdfWriter(path);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.addNewPage();
         Document document = new Document(pdfDocument);
-        document.add(list);
-       
+        
+        PdfFont font = PdfFontFactory.createFont(StandardFonts.TIMES_ROMAN);
+        PdfFont boldFont = PdfFontFactory.createFont(StandardFonts.TIMES_BOLD);
+        
+        Text text = new Text("Font Style Creation").setFont(font);
+        Text text1 = new Text(" SET FONT Style").setFont(boldFont);
+        
+        Paragraph paragraph = new Paragraph().add(text).add(text1);
+                
+        document.add(paragraph);
+        
         document.close();
 
         System.out.println("helloo....");
